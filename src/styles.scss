@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import '../node_modules/@angular/material/prebuilt-themes/indigo-pink.css';
+@font-face { font-family: 'Montserrat'; src: url('/assets/fonts/Montserrat-Regular.otf'); }
+:root {
+    --primary-color: #E51313;
+    --secondary-color-1: #173A73;
+    --secondary-color-2: #00519C;
+    --secondary-color-3: #081540;
+    --secondary-color-4: #091B37;
+    --secondary-color-5: #15376E;
+    --secondary-color-6: #750B0B;
+    --secondary-color-7: #1E2C4D;
+    --gray-color-1: #707070;
+    --gray-color-2: #454545;
+    --gray-color-4: #444444;
+    --gray-color-5: #828282;
+    --gray-color-6: #475467;
+    --gray-color-7: #45463680;
+    --gray-color-8: #EAEAEA;
+    --gray-color-9: #CEDCF0;
+    --white-color: #ffffff;
+    --black-color: #000000;
+    --bg-section: #F7F7F7;
+    --pagination: #F55E41;
+}
+html, body { height: 100%; }
+body {
+    margin: 0; 
+    font-size: 14px;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Montserrat'; }
