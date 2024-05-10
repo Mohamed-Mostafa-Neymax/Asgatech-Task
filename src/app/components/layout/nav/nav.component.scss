@@ -1,0 +1,18 @@
+nav {
+    position: fixed;
+    z-index: 4;
+    img { max-width: 200px; }
+    button {
+        color: var(--white-color);
+        font-size: 1rem;
+    }
+    background-color: var(--secondary-color-1);
+}
+
+@media only screen and (max-width: 991px) {
+    nav {
+        position: relative;
+        background-image: linear-gradient(to right, var(--secondary-color-1), var(--secondary-color-4));
+        img { width: 140px; }
+    }
+}

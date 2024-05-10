@@ -1,17 +1,25 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+
+import { NavComponent } from './nav/nav.component';
+import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-layout',
   template: `
     <main class="d-flex flex-column justify-content-between h-100">
       <section>
-        <nav>Navbar</nav>
-        <ng-content></ng-content>
+        <app-nav />
+        <ng-content />
       </section>
-      <footer>Footer</footer>
+      <app-footer />
     </main>
   `,
-  standalone: true
+  standalone: true,
+  imports: [
+    NavComponent,
+    FooterComponent
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LayoutComponent {
   

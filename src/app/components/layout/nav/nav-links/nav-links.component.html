@@ -1,0 +1,14 @@
+<ul [class]="classes()">
+    @for(link of navItems(); track link.id; let linkIndex = $index;) {
+        <li class="nav-item me-4">
+            <a 
+                    class="nav-link text-nowrap position-relative px-0 py-2" 
+                    [routerLink]="link.url"
+                    routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: linkIndex === 0 ? true : false}">
+                    <div class="animated-line position-absolute w-100"></div>
+                    <span>{{ link.title }}</span>
+                </a>
+        </li>
+    }
+</ul>
