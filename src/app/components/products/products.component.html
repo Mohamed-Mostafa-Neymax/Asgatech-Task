@@ -1,1 +1,47 @@
-<p>products works!</p>
+<section class="py-3 py-md-4 py-lg-5">
+    <div class="py-3 py-md-4 py-lg-5">
+        <div class="container pt-3 pt-md-4 pt-lg-5">
+            <div class="row">
+                @for(product of products(); track product) {
+                    <a 
+                        class="product text-decoration-none col-12 col-md-6 col-lg-4"
+                        (click)="showProductdetailsHandler(product)">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img [src]="product.image" alt="product" class="w-50">
+                        </div>
+                        <div class="mb-2 px-2 px-lg-3 pb-2 pb-lg-3">
+                            <div class="d-flex justify-content-between pt-3 pt-lg-4  mb-3">
+                                <app-text classes="mediumSizeBigWeight secondary-2 low-line-height">{{ product.title }}</app-text>
+                                <div class="p-2 p-md-2 rounded-circle d-flex productBtn align-items-center">
+                                    <mat-icon>south_east</mat-icon></div>
+                            </div>
+                            <app-text classes="lowSizeLowWeight gray-1 low-line-height mb-2">{{ product.description }}</app-text>
+                            <app-text classes="bigSizeMediumWeight black-color low-line-height">{{ product.price }} $</app-text>
+                            <mat-form-field class="mt-2" stop-propagation>
+                                <mat-label>Select an order</mat-label>
+                                <mat-select (selectionChange)="selectOrderHandler($event)" multiple>
+                                    <mat-select-trigger>
+                                        {{selectedOrders()[0] || ''}}
+                                        @if ((selectedOrders().length || 0) > 1) {
+                                            <span class="example-additional-selection">
+                                                (+{{(selectedOrders().length || 0) - 1}} {{selectedOrders().length === 2 ? 'other' : 'others'}})
+                                            </span>
+                                        }
+                                    </mat-select-trigger>
+                                    @for (order of ordersList(); track order) {
+                                        <mat-option [value]="order">{{order}}</mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                            <button 
+                                class="d-block" 
+                                stop-propagation 
+                                mat-raised-button
+                                (click)="AddToNewOrder(product)">Make it a new order</button>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</section>
