@@ -16,7 +16,12 @@
                                     <mat-icon>south_east</mat-icon></div>
                             </div>
                             <app-text classes="lowSizeLowWeight gray-1 low-line-height mb-2">{{ product.description }}</app-text>
-                            <app-text classes="bigSizeMediumWeight black-color low-line-height">{{ product.price }} $</app-text>
+                            <app-text classes="bigSizeMediumWeight black-color low-line-height mb-2">{{ product.price }} $</app-text>
+                            @if(product.stock < 6) {
+                                <app-text classes="lowSizeLowWeight red-color low-line-height">
+                                    Only {{ product.stock }} left in stock - order soon.
+                                </app-text>
+                            }
                             <mat-form-field class="mt-2" stop-propagation>
                                 <mat-label>Select an order</mat-label>
                                 <mat-select (selectionChange)="selectOrderHandler($event)" multiple>
