@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
@@ -22,7 +22,7 @@ import { RequestsService } from '@app/services/requests.service';
   templateUrl: './order-form.component.html',
   styleUrl: './order-form.component.scss'
 })
-export class OrderFormComponent {
+export class OrderFormComponent implements OnInit {
   private dialogRef = inject(MatDialogRef);
   private dialogData = inject(MAT_DIALOG_DATA);
   private requestsService = inject(RequestsService);
@@ -31,13 +31,12 @@ export class OrderFormComponent {
   customerName!: FormGroup;
   customerAddress!: FormGroup;
 
-  ngOnInit() {
-    console.log(this.dialogData);
+  ngOnInit(): void {
     this.orderForm = new FormGroup({
       'title': new FormControl(null, Validators.required),
       'customer': new FormGroup({
         'phone': new FormControl(null, Validators.required),
-        'email': new FormControl(null, Validators.required),
+        'email': new FormControl(null, [Validators.required, Validators.email]),
         'name': new FormGroup({
           'firstname': new FormControl(null, Validators.required),
           'lastname': new FormControl(null, Validators.required)
@@ -63,11 +62,9 @@ export class OrderFormComponent {
   }
 
   addOrderHandler() {
-    console.log(this.orderForm.value);
     let order = { id: crypto.randomUUID(), ...this.orderForm.value, products: [this.dialogData.product] }
     order.customer.id = crypto.randomUUID();
-    this.requestsService.addOrder(order).subscribe(postRes => console.log(postRes));
-    this.dialogRef.close();
+    this.requestsService.addOrder(order).subscribe(postRes => this.dialogRef.close());
   }
 
   closeDialogHandler() {

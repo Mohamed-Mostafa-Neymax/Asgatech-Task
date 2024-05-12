@@ -1,1 +1,37 @@
-<p>product-details works!</p>
+<section class="p-3 product-details">
+    <h2 mat-dialog-title>Product Details</h2>
+    <div class="row product-wrapper">
+        <div class="col-12 col-md-6 col-lg-3">
+            <img class="w-100 mb-2" [src]="dialogData.product.image" alt="product">
+        </div>
+        <div class="col-12 col-md-6 col-lg-6">
+            <app-text classes="lowSizeLowWeight gray-1 low-line-height">Title : {{ dialogData.product.title }}</app-text>
+            <app-text classes="lowSizeLowWeight gray-1 low-line-height">Brand : {{ dialogData.product.brand }}</app-text>
+            <app-text classes="lowSizeLowWeight gray-1 low-line-height">Category : {{ dialogData.product.category }}</app-text>
+            <app-text classes="lowSizeLowWeight gray-1 low-line-height">Description : {{ dialogData.product.description }}</app-text>
+            <div class="d-flex gap-2">
+                <app-text classes="lowSizeLowWeight gray-1 low-line-height">Price : </app-text>
+                <div class="d-flex">
+                    <app-text classes="lowSizeBigWeight black-color low-line-height">{{ dialogData.product.price + '$' }}</app-text>&nbsp;
+                    <app-text classes="lowSizeLowWeight red-color low-line-height">({{ 'Discount ' + dialogData.product.discountPercentage + '%' }})</app-text>
+                </div>
+            </div>
+            <div class="d-flex gap-2 align-items-center">
+                <app-text classes="lowSizeLowWeight gray-1 low-line-height">Rating : </app-text>
+                <div class="rating">
+                    <div class="overflow-hidden" [ngStyle]="{width: 100 * dialogData.product.rating / 5 + 'px'}">
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                        <span>&#9733;</span>
+                    </div>
+                </div>
+            </div>
+
+            @if(dialogData.product.stock < 6) {
+                <app-text classes="lowSizeLowWeight red-color low-line-height">Only {{ dialogData.product.stock }} left in stock - order soon.</app-text>
+            }
+        </div>
+    </div>
+</section>

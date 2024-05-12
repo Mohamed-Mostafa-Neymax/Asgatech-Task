@@ -2,6 +2,12 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.3.
 
+# Comments
+
+ - This task uses Firebase as a Back-End Database
+ - You can create multiple orders each one has its own products, details, total price and more..
+ - It would be better if the task uses NgRx for state management but I'll explain it if there's a technical interview
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.

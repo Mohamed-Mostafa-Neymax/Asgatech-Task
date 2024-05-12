@@ -17,4 +17,5 @@ export class RequestsService {
     // Orders
     getOrders() { return this.http.get<OrderResponse[]>(`${environment.apiUrl}orders.json`); }
     addOrder(order: OrderResponse) { return this.http.post(`${environment.apiUrl}orders.json`, order); }
+    addProductToOrder(orders: OrderResponse[]) { return this.http.put(`${environment.apiUrl}orders.json`, orders); }
 }

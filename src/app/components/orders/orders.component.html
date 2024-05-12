@@ -1,1 +1,91 @@
-<p>orders works!</p>
+<section class="py-3 py-md-4 py-lg-5">
+    <div class="py-3 py-md-4 py-lg-5">
+        <div class="container pt-3 pt-md-4 pt-lg-5">
+            @for (order of ordersList(); track order.id) {
+                <div class="order-wrapper">
+                    <app-text classes="bigSizeBigWeight secondary-6 low-line-height mb-3">{{ order.title }}</app-text>
+                    <div class="order-info p-3 p-lg-4">
+                        <app-text classes="mediumSizeBigWeight secondary-3 low-line-height mb-3">Customer Info</app-text>
+                        <app-text classes="lowSizeLowWeight gray-1 low-line-height px-2">
+                            Name : {{ order.customer.name.firstname + ' ' +  order.customer.name.lastname}}
+                        </app-text>
+                        <app-text classes="lowSizeLowWeight gray-1 low-line-height px-2">Phone : {{ order.customer.phone }}</app-text>
+                        <app-text classes="lowSizeLowWeight gray-1 low-line-height px-2">Email : {{ order.customer.email }}</app-text>
+                        <app-text classes="lowSizeLowWeight gray-1 low-line-height px-2">
+                            Address : {{
+                                order.customer.address.number + ' ' +
+                                order.customer.address.street + ' ' +
+                                order.customer.address.city
+                            }}
+                        </app-text>
+                        <app-text classes="lowSizeLowWeight gray-1 low-line-height px-2">Zipcode : {{ order.customer.address.zipCode }}</app-text>
+                        <app-text classes="lowSizeLowWeight gray-1 low-line-height px-2">Payment Method : {{ order.customer.paymentMethod }}</app-text>
+                        @if (order.customer.visaNumber) {
+                            <app-text classes="lowSizeLowWeight gray-1 low-line-height px-2">Visa Number : {{ order.customer.visaNumber }}</app-text>
+                        }
+                        <hr>
+                        <app-text classes="mediumSizeBigWeight secondary-3 low-line-height mb-3">Products Info</app-text>
+                        @for (product of order.products; track product.id) {
+                            <div class="row product-wrapper">
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <img class="w-100 mb-2" [src]="product.image" alt="product">
+                                </div>
+                                <div class="col-12 col-md-6 col-lg-9">
+                                    <app-text classes="lowSizeLowWeight gray-1 low-line-height">Title : {{ product.title }}</app-text>
+                                    <app-text classes="lowSizeLowWeight gray-1 low-line-height">Brand : {{ product.brand }}</app-text>
+                                    <app-text classes="lowSizeLowWeight gray-1 low-line-height">Category : {{ product.category }}</app-text>
+                                    <app-text classes="lowSizeLowWeight gray-1 low-line-height">Description : {{ product.description }}</app-text>
+                                    <div class="d-flex gap-2">
+                                        <app-text classes="lowSizeLowWeight gray-1 low-line-height">Price : </app-text>
+                                        <div class="d-flex">
+                                            <app-text classes="lowSizeBigWeight black-color low-line-height">{{ product.price + '$' }}</app-text>&nbsp;
+                                            <app-text classes="lowSizeLowWeight red-color low-line-height">({{ 'Discount ' + product.discountPercentage + '%' }})</app-text>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <app-text classes="lowSizeLowWeight gray-1 low-line-height">Rating : </app-text>
+                                        <div class="rating">
+                                            <div class="overflow-hidden" [ngStyle]="{width: 100 * product.rating / 5 + 'px'}">
+                                                <span>&#9733;</span>
+                                                <span>&#9733;</span>
+                                                <span>&#9733;</span>
+                                                <span>&#9733;</span>
+                                                <span>&#9733;</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-4">
+                                        <app-text classes="lowSizeLowWeight gray-1 low-line-height">quantity : {{ product.quantity }}</app-text>
+                                        <div class="d-flex gap-2">
+                                            <button mat-mini-fab color="primary" (click)="quantityHandler('increase', order.id, product.id)">
+                                                <mat-icon><span class="material-symbols-outlined">add</span></mat-icon>
+                                            </button>
+                                            <button mat-mini-fab color="primary" (click)="quantityHandler('decrease', order.id, product.id)">
+                                                <mat-icon><span class="material-symbols-outlined">remove</span></mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    @if(product.stock < 6) {
+                                        <app-text classes="lowSizeLowWeight red-color low-line-height">Only {{ product.stock }} left in stock - order soon.</app-text>
+                                    }
+                                </div>
+                            </div>
+                        }
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                            <div class="d-flex gap-2">
+                                <app-text classes="mediumSizeBigWeight red-color low-line-height">Total Price :</app-text>
+                                <app-text classes="mediumSizeBigWeight black-color low-line-height">{{ calculateTotalPrice(order) + ' $' }}</app-text>
+                            </div>
+                            <app-button
+                                buttonType="button"
+                                classes="position-relative border-0 p-0 red-bordered-btn"
+                                btnText="Submit the Order"
+                                (click)="PlaceOrderHandler()" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

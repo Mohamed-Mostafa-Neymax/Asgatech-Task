@@ -1,0 +1,53 @@
+
+
+@mixin red-btn-first-part {
+    z-index: 2;
+    div:first-child { border-radius: 2rem; }
+}
+
+@mixin red-btn-last-part {
+    z-index: 3;
+    animation-duration: 400ms;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+    background-color: unset;
+    div:first-child { border-radius: 32px; }
+}
+
+@mixin btn-colors($globalColor, $rareColor, $btnBgColor, $btnColor, $borderColor) {
+    background-color: transparent;
+    font-size: 1rem;
+    font-weight: 600;
+    & > div { div { border: 2px solid $borderColor; } }
+    & > div:first-child { 
+        @include red-btn-first-part; 
+        & > div:first-child { background-color: $btnBgColor; color: $btnColor; }
+        & > div:last-child { background-color: $btnBgColor; color: $btnColor; }
+    }
+    & > div:last-child {
+        @include red-btn-last-part;
+        div { background-color: $globalColor; }
+    }
+    &:hover {
+        color: $rareColor;
+        & > div:last-child { animation-name: LeftSide; }
+    }
+    &:not(:hover) {
+        color: $globalColor;
+        & > div:last-child { animation-name: RightSide; }
+    }
+}
+
+.red-bordered-btn {
+    @include btn-colors(var(--primary-color), var(--white-color), transparent, var(--primary-color), var(--primary-color));
+}
+
+@keyframes LeftSide {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+@keyframes RightSide {
+    from { width: 100%; }
+    to { width: 0%; }
+}

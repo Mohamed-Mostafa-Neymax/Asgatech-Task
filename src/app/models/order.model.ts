@@ -7,7 +7,7 @@ interface Customer {
     paymentMethod: string;
     visaNumber: number;
     name: { firstname: string; lastname: string; };
-    address: { city: string; number: number; street: string; zipcode: number; };
+    address: { city: string; number: number; street: string; zipCode: number; };
 }
 
 export interface OrderResponse {
