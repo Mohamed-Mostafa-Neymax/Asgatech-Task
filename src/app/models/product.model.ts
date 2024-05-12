@@ -9,4 +9,5 @@ export interface ProductResponse {
     rating: number;
     stock: number;
     title: string;
+    quantity: number
 }

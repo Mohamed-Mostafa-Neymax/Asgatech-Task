@@ -22,22 +22,32 @@
                                     Only {{ product.stock }} left in stock - order soon.
                                 </app-text>
                             }
-                            <mat-form-field class="mt-2" stop-propagation>
-                                <mat-label>Select an order</mat-label>
-                                <mat-select (selectionChange)="selectOrderHandler($event)" multiple>
-                                    <mat-select-trigger>
-                                        {{selectedOrders()[0] || ''}}
-                                        @if ((selectedOrders().length || 0) > 1) {
-                                            <span class="example-additional-selection">
-                                                (+{{(selectedOrders().length || 0) - 1}} {{selectedOrders().length === 2 ? 'other' : 'others'}})
-                                            </span>
+                            <div>
+                                <mat-form-field class="mt-2" stop-propagation>
+                                    <mat-label>Select an order</mat-label>
+                                    <mat-select (selectionChange)="selectOrderHandler($event)">
+                                        <mat-select-trigger>
+                                            @if (selectedOrder().product_id === product.id) {
+                                                {{ selectedOrder()['title'] }}
+                                            } @else {
+                                                {{ '' }}
+                                            }
+                                        </mat-select-trigger>
+                                        @for (order of ordersDropdown(); track order) {
+                                            <mat-option [value]="{order_id: order.id, title: order.title, product_id: product.id}">{{ order.title }}</mat-option>
                                         }
-                                    </mat-select-trigger>
-                                    @for (order of ordersList(); track order) {
-                                        <mat-option [value]="order">{{order}}</mat-option>
-                                    }
-                                </mat-select>
-                            </mat-form-field>
+                                    </mat-select>
+                                </mat-form-field>
+                                @if(selectedOrder()['title'].length > 0 && selectedOrder().product_id === product.id) {
+                                    <button 
+                                        class="me-3" 
+                                        mat-flat-button 
+                                        color="primary" 
+                                        type="button" 
+                                        stop-propagation
+                                        (click)="addProductHandler()">Add</button>
+                                }
+                            </div>
                             <button 
                                 class="d-block" 
                                 stop-propagation 
