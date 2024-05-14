@@ -62,8 +62,8 @@ export class OrderFormComponent implements OnInit {
   }
 
   addOrderHandler() {
-    let order = { id: crypto.randomUUID(), ...this.orderForm.value, products: [this.dialogData.product] }
-    order.customer.id = crypto.randomUUID();
+    let order = { id: 'id-' + Math.random(), ...this.orderForm.value, products: [this.dialogData.product] }
+    order.customer.id = 'id-' + Math.random();
     this.requestsService.addOrder(order).subscribe(postRes => this.dialogRef.close());
   }
 

@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
 export class NavLinksComponent {
   classes = input.required<string>();
   navItems = signal([
-    { id: crypto.randomUUID(), title: 'Products', url: '/' },
-    { id: crypto.randomUUID(), title: 'Orders', url: '/orders' }
+    { id: 1, title: 'Products', url: '/' },
+    { id: 2, title: 'Orders', url: '/orders' }
   ]);
 }
